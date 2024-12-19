@@ -8,7 +8,7 @@ module.exports = {
         author: "Badhon",
         countDown: 5,
         role: 0,
-        category: "system",
+        category: "info",
         guide: {
             vi: "Not Available",
             en: "bot uptime"
