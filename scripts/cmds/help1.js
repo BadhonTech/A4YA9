@@ -8,6 +8,11 @@ module.exports = {
   },
 
   onStart: async function ({ message, args, commands }) {
+    // Validate commands input
+    if (!commands || typeof commands[Symbol.iterator] !== "function") {
+      return message.reply("Error: Commands list is unavailable.");
+    }
+
     const commandsPerPage = 30;
     const page = parseInt(args[0]) || 1;
 
@@ -49,7 +54,7 @@ module.exports = {
 
     // Generate the message for the requested page
     let msg = `===== 𝗣𝗶𝗸𝗮 - 𝗕𝗼𝘁 🦋 ======\n\n`;
-    msg += `📍 Total Commands: ${commands.size}\n`;
+    msg += `📍 Total Commands: ${commands.size || commands.length}\n`;
     msg += `📍 Page: ${page}/${totalPages}\n\n`;
 
     for (const { category, cmds } of paginated[page - 1]) {
