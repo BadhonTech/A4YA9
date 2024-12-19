@@ -1,3 +1,5 @@
+const botStartTime = Date.now();
+
 module.exports = {
 	config: {
 		name: "uptime",
@@ -10,28 +12,24 @@ module.exports = {
 		guide: {
 			vi: "Not Available",
 			en: "bot uptime"
-		} 
+		}
 	},
+	onStart: async function ({ api, args, event }) {  
+		const now = Date.now();
+		const uptime = now - botStartTime;
 
-// Store the bot's start time globally
-const botStartTime = Date.now();
+		const seconds = Math.floor((uptime / 1000) % 60);
+		const minutes = Math.floor((uptime / (1000 * 60)) % 60);
+		const hours = Math.floor((uptime / (1000 * 60 * 60)) % 24);
+		const days = Math.floor(uptime / (1000 * 60 * 60 * 24));
+		
+		const uptimeMessage = 
+		`💡 Bot Uptime:\n
+		🗓️ Days: ${days}\n
+		⏰ Hours: ${hours}\n
+		🕒 Minutes: ${minutes}\n
+		⏱️ Seconds: ${seconds}`;
 
-// The main function for the command
-onStart: async function ({ api, args, event }) {  
-  const now = Date.now(); // Get the current time
-  const uptime = now - botStartTime; // Calculate the bot's uptime in milliseconds
-
-  const seconds = Math.floor((uptime / 1000) % 60);
-  const minutes = Math.floor((uptime / (1000 * 60)) % 60);
-  const hours = Math.floor((uptime / (1000 * 60 * 60)) % 24);
-  const days = Math.floor(uptime / (1000 * 60 * 60 * 24));
-  
-  const uptimeMessage = 
-  `🕒 Bot Uptime: \n
-  ${days} days, \n
-  ${hours} hours, \n
-  ${minutes} minutes, \n
-  ${seconds} seconds.`;
-
-  api.sendMessage(uptimeMessage, event.threadID, event.messageID);
+		api.sendMessage(uptimeMessage, event.threadID, event.messageID);
+	}
 };
