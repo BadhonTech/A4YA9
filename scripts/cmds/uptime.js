@@ -23,10 +23,12 @@ module.exports = {
         const hours = Math.floor((uptime / (1000 * 60 * 60)) % 24);
         const days = Math.floor(uptime / (1000 * 60 * 60 * 24));
 
-        const uptimeMessage = `======= 𝗣𝗶𝗸𝗮 - 𝗕𝗼𝘁 🦋 ========\n💡 Bot Uptime:\n
-🗓️ Days: ${days}\n
-⏰ Hours: ${hours}\n
-🕒 Minutes: ${minutes}\n
+        const uptimeMessage = `==== 𝗣𝗶𝗸𝗮 - 𝗕𝗼𝘁 🦋 ====
+
+💡 Bot Uptime:
+🗓️ Days: ${days}
+⏰ Hours: ${hours}
+🕒 Minutes: ${minutes}
 ⏱️ Seconds: ${seconds}`;
 
         api.sendMessage(uptimeMessage, event.threadID, event.messageID);
